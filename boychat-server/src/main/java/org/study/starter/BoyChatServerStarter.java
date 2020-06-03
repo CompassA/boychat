@@ -5,6 +5,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.study.handler.FirstServerHandler;
 
 /**
  * @author fanqie
@@ -22,7 +23,7 @@ public class BoyChatServerStarter {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-
+                        ch.pipeline().addLast(new FirstServerHandler());
                     }
                 });
         serverBootstrap.bind(9090);

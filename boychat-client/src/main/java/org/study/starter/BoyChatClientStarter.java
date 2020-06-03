@@ -5,6 +5,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.study.handler.FirstClientHandler;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,7 @@ public class BoyChatClientStarter {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-
+                        ch.pipeline().addLast(new FirstClientHandler());
                     }
                 });
         connect(bootstrap, "127.0.0.1", 9090, 3);
@@ -35,10 +36,10 @@ public class BoyChatClientStarter {
             } else if (retryTimes > 0) {
                 System.out.println("connection failed, client will retry in 5 seconds!");
                 bootstrap.config().group().schedule(
-                        () -> connect(bootstrap, host, port, retryTimes - 1),
-                        5, TimeUnit.SECONDS);
+                        () -> connect(bootstrap, host, port, retryTimes - 1), 5, TimeUnit.SECONDS);
             } else {
                 System.out.println("connection failed!");
+                System.exit(0);
             }
         });
     }

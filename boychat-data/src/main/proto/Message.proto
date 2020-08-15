@@ -1,0 +1,18 @@
+syntax = "proto3";
+package m;
+
+option java_multiple_files = true;
+option java_package = "org.study.boychat.data";
+
+message Message {
+    int32 magicNumber = 1;
+    int32 version = 2;
+    int32 type = 3;
+    int32 length = 4;
+    bytes body = 5;
+}
+
+message LoginMsg {
+    string account = 1;
+    string password = 2;
+}

@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.study.DateUtil;
+import org.study.boychat.data.LoginMsg;
+import org.study.boychat.data.Message;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -16,12 +18,19 @@ public class FirstServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.printf("%s: receive client msg [%s]\n",
-                DateUtil.dateFormat(LocalDateTime.now()),
-                ((ByteBuf) msg).toString(StandardCharsets.UTF_8));
+        //get bytes
+        ByteBuf byteBuf = (ByteBuf) msg;
+        byte[] msgBytes = new byte[byteBuf.readableBytes()];
+        byteBuf.readBytes(msgBytes);
 
-        ctx.channel().writeAndFlush(
-                ctx.alloc().buffer().writeBytes("hello client!".getBytes(StandardCharsets.UTF_8)));
+        //deserialize
+        Message message = Message.parseFrom(msgBytes);
+        System.out.println(message.toString());
+        LoginMsg loginMsg = LoginMsg.parseFrom(message.getBody());
+        System.out.println(loginMsg);
+
+        //response
+        ctx.channel().writeAndFlush("msg received!");
     }
 
 

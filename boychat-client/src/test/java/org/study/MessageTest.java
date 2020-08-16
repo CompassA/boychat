@@ -4,7 +4,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.study.boychat.data.LoginMsg;
+import org.study.boychat.data.LoginRequest;
 import org.study.boychat.data.Message;
 
 /**
@@ -18,7 +18,7 @@ public class MessageTest {
         //build login msg
         String account = "user person";
         String password = "1234";
-        LoginMsg loginMsg = LoginMsg.newBuilder()
+        LoginRequest loginMsg = LoginRequest.newBuilder()
                 .setAccount(account)
                 .setPassword(password)
                 .build();
@@ -41,6 +41,6 @@ public class MessageTest {
         byte[] body_ = msgDecode.getBody().toByteArray();
         Assert.assertArrayEquals(body_, body);
 
-        Assert.assertEquals(loginMsg, LoginMsg.parseFrom(body_));
+        Assert.assertEquals(loginMsg, LoginRequest.parseFrom(body_));
     }
 }

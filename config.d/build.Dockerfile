@@ -1,6 +1,6 @@
 # build pacakge
 FROM maven:3.3-jdk-8 as builder
-COPY . /usr/src/app
+COPY .. /usr/src/app
 WORKDIR /usr/src/app
 RUN mvn clean -DskipTests package -B -U -e
 

@@ -8,4 +8,4 @@
 FROM openjdk:8
 COPY ./*.jar /usr/src/myapp
 WORKDIR /usr/src/myapp
-RUN java -jar *.jar
+CMD ["java", "-jar", "*.jar"]

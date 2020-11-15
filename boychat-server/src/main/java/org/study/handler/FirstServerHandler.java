@@ -16,6 +16,7 @@ import org.study.boychat.data.MessageResponse;
  * @author fanqie
  * @date 2020/6/3
  */
+@Deprecated
 public class FirstServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override

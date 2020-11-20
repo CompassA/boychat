@@ -12,8 +12,8 @@ import org.boychat.factory.MessageFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.study.boychat.data.MessageRequest;
-import org.study.handler.MessageHandler;
-import org.study.server.BoyChatReactorServer;
+import org.study.common.TestBoyChatReactorServer;
+import org.study.common.TestMessageHandler;
 
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
@@ -30,8 +30,8 @@ public class MockStickyTests {
         //start server
         int port = 5654;
         String ip = "127.0.0.1";
-        BoyChatReactorServer boyChatReactorServer = new BoyChatReactorServer(port);
-        boyChatReactorServer.start();
+        TestBoyChatReactorServer testBoyChatReactorServer = new TestBoyChatReactorServer(port);
+        testBoyChatReactorServer.start();
 
         //start client and send message
         final StringBuilder sentMessages = new StringBuilder();
@@ -45,7 +45,7 @@ public class MockStickyTests {
                     if (future.isSuccess()) {
                         Channel channel = ((ChannelFuture) future).channel();
                         for (int i = 0; i < 1000; ++i) {
-                            String randomUUID = UUID.randomUUID().toString();
+                            String randomUUID = UUID.randomUUID().toString() + ":";
                             sentMessages.append(randomUUID);
                             byte[] body = MessageRequest.newBuilder()
                                     .setMessage(randomUUID)
@@ -66,12 +66,14 @@ public class MockStickyTests {
 
         //check sticky
         cyclicBarrier.await();
-        boyChatReactorServer.getHandlers().stream()
-                .filter(handler -> handler instanceof MessageHandler)
-                .map(handler -> (MessageHandler) handler)
+        testBoyChatReactorServer.getHandlers().stream()
+                .filter(handler -> handler instanceof TestMessageHandler)
+                .map(handler -> (TestMessageHandler) handler)
                 .findFirst()
                 .ifPresent(messageHandler -> {
                     String serverReceived = messageHandler.cleanCache();
+                    System.out.println("sent: " + sentMessages.toString());
+                    System.out.println("rcvd: " + serverReceived);
                     Assert.assertNotEquals(serverReceived, sentMessages.toString());
                 });
     }

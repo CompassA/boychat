@@ -1,20 +1,28 @@
 package org.study.encoder;
 
-import io.netty.buffer.ByteBuf;
+import com.google.protobuf.AbstractMessage;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToByteEncoder;
-import org.study.boychat.data.Message;
+import io.netty.handler.codec.MessageToMessageEncoder;
+import lombok.AllArgsConstructor;
+import org.boychat.data.core.ProtoPacketFactory;
+
+import java.util.List;
 
 /**
  * @author tomato
- * Created on 2020.11.15
+ * Created on 2020.11.18
  */
-public class ProtoEncoder extends MessageToByteEncoder<Message> {
+@AllArgsConstructor
+public class ProtoEncoder extends MessageToMessageEncoder<AbstractMessage> {
+
+    private final ProtoPacketFactory protoPacketFactory;
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
-        if (msg != null) {
-            out.writeBytes(msg.toByteArray());
+    protected void encode(ChannelHandlerContext ctx, AbstractMessage msg, List<Object> out) throws Exception {
+        if (msg == null) {
+            ctx.channel().close();
+            return;
         }
+        out.add(protoPacketFactory.create(msg));
     }
 }

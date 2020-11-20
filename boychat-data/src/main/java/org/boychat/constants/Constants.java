@@ -4,13 +4,15 @@ package org.boychat.constants;
  * @author fanqie
  * Created on 2020.08.15
  */
-public final class Constants {
+public interface Constants {
 
-    public static final int MAGIC_NUMBER = 0xabcdefab;
+    int MAGIC_NUMBER = 0x4869ABAB;
 
-    public static final int VERSION = 1;
+    int VERSION = 1;
 
-    public static final class Attributes {
-        public static final String LOGIN_KEY = "login";
+    int HEADER_LENGTH = 25;
+
+    public interface Attributes {
+        String LOGIN_KEY = "login";
     }
 }

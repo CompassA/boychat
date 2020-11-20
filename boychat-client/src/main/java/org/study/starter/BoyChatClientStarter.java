@@ -1,8 +1,8 @@
 package org.study.starter;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.google.protobuf.ByteString;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -12,8 +12,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.boychat.constants.Constants;
 import org.boychat.enums.MsgType;
-import org.boychat.factory.MessageFactory;
-import org.study.boychat.data.Message;
+import org.boychat.enums.SerializationEnum;
 import org.study.boychat.data.MessageRequest;
 import org.study.constans.Attributes;
 import org.study.handler.FirstClientHandler;
@@ -81,12 +80,16 @@ public class BoyChatClientStarter {
                                 .setMessage(consoleReader.readLine())
                                 .build()
                                 .toByteArray();
-                        byte[] message = MessageFactory.create(MsgType.MSG, body).toByteArray();
-
-                        channel.writeAndFlush(
-                                ByteBufAllocator.DEFAULT.buffer(message.length, message.length)
-                                        .writeBytes(message)
-                        );
+                        int bufferLen = body.length + Constants.HEADER_LENGTH;
+                        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer(bufferLen, bufferLen)
+                                .writeInt(Constants.MAGIC_NUMBER)
+                                .writeInt(Constants.VERSION)
+                                .writeByte(SerializationEnum.PROTO.getId())
+                                .writeLong(0)
+                                .writeInt(MsgType.MSG.getTypeId())
+                                .writeInt(body.length)
+                                .writeBytes(body);
+                        channel.writeAndFlush(byteBuf);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

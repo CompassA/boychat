@@ -1,4 +1,4 @@
-package org.study.server;
+package org.study.common;
 
 import com.google.common.collect.Lists;
 import io.netty.bootstrap.ServerBootstrap;
@@ -8,23 +8,18 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.apache.commons.collections.CollectionUtils;
-import org.boychat.factory.CommonProtoPacketFactory;
-import org.study.decoder.PacketDecoder;
-import org.study.decoder.PacketSplitter;
-import org.study.decoder.ProtoDecoder;
-import org.study.encoder.PacketEncoder;
-import org.study.encoder.ProtoEncoder;
 import org.study.handler.LoginHandler;
-import org.study.handler.MessageHandler;
 
 import java.util.List;
 
 /**
  * @author tomato
- * Created on 2020.11.18
+ * Created on 2020.11.15
  */
-public class BoyChatReactorServer {
+@Getter
+public class TestBoyChatReactorServer {
 
     private final int bindPort;
 
@@ -36,27 +31,18 @@ public class BoyChatReactorServer {
 
     private final List<ChannelHandler> handlers;
 
-    public BoyChatReactorServer(int bindPort) {
+    public TestBoyChatReactorServer(int bindPort) {
         this.bindPort = bindPort;
         this.bossGroup = new NioEventLoopGroup();
         this.workerGroup = new NioEventLoopGroup();
         this.handlers = Lists.newArrayList(
-                //decoder
-                new PacketSplitter(),
-                new PacketDecoder(),
-                new ProtoDecoder(),
-
-                //handler
+                new TestProtoDecoder(),
                 new LoginHandler(),
-                new MessageHandler(),
-
-                //encoder
-                new PacketEncoder(),
-                new ProtoEncoder(new CommonProtoPacketFactory())
-        );
+                new TestMessageHandler(),
+                new TestProtoEncoder());
         this.serverBootstrap = new ServerBootstrap().group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new BoyChatReactorServer.BoyChatChannelInitializer(handlers));
+                .childHandler(new BoyChatChannelInitializer(handlers));
     }
 
     public void start() {

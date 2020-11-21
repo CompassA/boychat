@@ -3,7 +3,6 @@ package org.boychat.factory;
 import com.google.protobuf.ByteString;
 import org.boychat.constants.Constants;
 import org.boychat.enums.MsgType;
-import org.study.boychat.data.LoginResponse;
 import org.study.boychat.data.Message;
 
 /**

@@ -18,27 +18,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.study</groupId>
-            <artifactId>boychat-data</artifactId>
+            <artifactId>boychat-common</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
-
     </build>
 </project>

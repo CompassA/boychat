@@ -1,9 +1,10 @@
-package org.study.encoder;
+package org.study.boychat.encoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import org.boychat.data.ChatPacket;
+import org.study.boychat.utils.ReadWriteBufferUtil;
 
 /**
  * @author tomato
@@ -17,12 +18,6 @@ public class PacketEncoder extends MessageToByteEncoder<ChatPacket> {
             ctx.channel().close();
             return;
         }
-        out.writeInt(msg.getMagicNumber());
-        out.writeInt(msg.getVersion());
-        out.writeByte(msg.getSerialization());
-        out.writeLong(msg.getId());
-        out.writeInt(msg.getType());
-        out.writeInt(msg.getBody().length);
-        out.writeBytes(msg.getBody());
+        ReadWriteBufferUtil.write(out, msg);
     }
 }

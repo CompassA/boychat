@@ -1,4 +1,4 @@
-package org.study.decoder;
+package org.study.boychat.decoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

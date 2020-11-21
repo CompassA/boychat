@@ -10,11 +10,12 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.boychat.factory.CommonProtoPacketFactory;
-import org.study.decoder.PacketDecoder;
-import org.study.decoder.PacketSplitter;
-import org.study.decoder.ProtoDecoder;
-import org.study.encoder.PacketEncoder;
-import org.study.encoder.ProtoEncoder;
+import org.study.boychat.decoder.PacketDecoder;
+import org.study.boychat.decoder.PacketSplitter;
+import org.study.boychat.decoder.ProtoDecoder;
+import org.study.boychat.encoder.PacketEncoder;
+import org.study.boychat.encoder.ProtoEncoder;
+import org.study.boychat.logger.TomatoLogger;
 import org.study.handler.LoginHandler;
 import org.study.handler.MessageHandler;
 
@@ -25,6 +26,8 @@ import java.util.List;
  * Created on 2020.11.18
  */
 public class BoyChatReactorServer {
+
+    private static final TomatoLogger LOGGER = TomatoLogger.getLogger(BoyChatReactorServer.class);
 
     private final int bindPort;
 
@@ -61,6 +64,7 @@ public class BoyChatReactorServer {
 
     public void start() {
         serverBootstrap.bind(bindPort);
+        LOGGER.info("server started on port " + bindPort);
     }
 
     @AllArgsConstructor

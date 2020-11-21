@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.Getter;
 import org.study.boychat.data.MessageRequest;
 import org.study.boychat.data.MessageResponse;
+import org.study.boychat.logger.TomatoLogger;
 
 /**
  * @author tomato
@@ -13,12 +14,13 @@ import org.study.boychat.data.MessageResponse;
 @Getter
 public class MessageHandler extends SimpleChannelInboundHandler<MessageRequest> {
 
+    private static final TomatoLogger LOGGER = TomatoLogger.getLogger(MessageHandler.class);
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequest request)
             throws Exception {
         String clientMessage = request.getMessage();
-        System.out.printf("接收到客户端消息: %s\n", clientMessage);
-
+        LOGGER.info("received message from client: " + clientMessage);
         ctx.channel().writeAndFlush(
                 MessageResponse.newBuilder().setMessage(clientMessage).build()
         );

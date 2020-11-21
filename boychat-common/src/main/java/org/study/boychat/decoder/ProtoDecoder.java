@@ -1,4 +1,4 @@
-package org.study.decoder;
+package org.study.boychat.decoder;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;

@@ -18,7 +18,7 @@ import org.study.boychat.data.MessageRequest;
 import org.study.boychat.logger.TomatoLogger;
 import org.study.boychat.utils.ReadWriteBufferUtil;
 import org.study.boychat.utils.ThreadPoolUtil;
-import org.study.constans.Attributes;
+import org.study.boychat.data.Attributes;
 import org.study.handler.FirstClientHandler;
 
 import java.io.BufferedReader;

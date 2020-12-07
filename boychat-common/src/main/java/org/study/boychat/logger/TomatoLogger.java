@@ -1,6 +1,5 @@
 package org.study.boychat.logger;
 
-import jdk.internal.instrumentation.Logger;
 import org.study.boychat.utils.DateUtil;
 
 import java.io.PrintStream;
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
  * @author tomato
  * Created on 2020.11.21
  */
-public class TomatoLogger implements Logger {
+public class TomatoLogger {
 
     private static final PrintStream PRINT_STREAM = System.out;
 
@@ -24,31 +23,25 @@ public class TomatoLogger implements Logger {
         this.clazz = clazz;
     }
 
-    @Override
     public void error(String s) {
         PRINT_STREAM.println(commonPrefix(LogType.ERROR) + s);
     }
 
-    @Override
     public void warn(String s) {
 
     }
 
-    @Override
     public void info(String s) {
         PRINT_STREAM.println(commonPrefix(LogType.INFO) + s);
     }
 
-    @Override
     public void debug(String s) {
 
     }
 
-    @Override
     public void trace(String s) {
     }
 
-    @Override
     public void error(String s, Throwable throwable) {
         PRINT_STREAM.println(commonPrefix(LogType.ERROR) + s);
         PRINT_STREAM.println(throwable);

@@ -1,4 +1,4 @@
-package org.study.constans;
+package org.study.boychat.data;
 
 import io.netty.util.AttributeKey;
 import org.boychat.constants.Constants;
@@ -9,7 +9,7 @@ import org.boychat.constants.Constants;
  */
 public class Attributes {
 
-    public static final AttributeKey<Object> LOGIN_MARK =
+    public static final AttributeKey<Boolean> LOGIN_MARK =
             AttributeKey.newInstance(Constants.Attributes.LOGIN_KEY);
 
 }

@@ -14,7 +14,7 @@ import org.study.boychat.data.LoginResponse;
 import org.study.boychat.data.MessageResponse;
 import org.study.boychat.logger.TomatoLogger;
 import org.study.boychat.utils.ReadWriteBufferUtil;
-import org.study.constans.Attributes;
+import org.study.boychat.data.Attributes;
 
 import java.util.UUID;
 

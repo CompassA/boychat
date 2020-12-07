@@ -16,6 +16,7 @@ import org.study.boychat.decoder.ProtoDecoder;
 import org.study.boychat.encoder.PacketEncoder;
 import org.study.boychat.encoder.ProtoEncoder;
 import org.study.boychat.logger.TomatoLogger;
+import org.study.handler.AuthHandler;
 import org.study.handler.LoginHandler;
 import org.study.handler.MessageHandler;
 
@@ -51,6 +52,7 @@ public class BoyChatReactorServer {
 
                 //handler
                 new LoginHandler(),
+                new AuthHandler(),
                 new MessageHandler(),
 
                 //encoder

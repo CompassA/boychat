@@ -35,6 +35,8 @@ public class BoyChatClientStarter {
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(BoyChatClientStarter.class);
 
+    private static final String END_MARK = "bye";
+
     public static void main(String[] args) {
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
@@ -75,6 +77,20 @@ public class BoyChatClientStarter {
                     String oneLine = StringUtil.EMPTY_STRING;
                     try {
                         oneLine = consoleReader.readLine();
+                        if (oneLine.equals(END_MARK)) {
+                            LOGGER.info("client quit");
+                            channel.close().addListener(future -> {
+                                if (future.isSuccess()) {
+                                    System.exit(0);
+                                } else {
+                                    channel.close().addListener(f -> {
+                                        if (f.isSuccess()) {
+                                            System.exit(0);
+                                        }
+                                    });
+                                }
+                            });
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

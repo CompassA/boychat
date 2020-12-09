@@ -1,14 +1,10 @@
 package org.study.server;
 
-import com.google.common.collect.Lists;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import lombok.AllArgsConstructor;
-import org.apache.commons.collections.CollectionUtils;
 import org.boychat.factory.CommonProtoPacketFactory;
 import org.study.boychat.decoder.PacketDecoder;
 import org.study.boychat.decoder.PacketSplitter;
@@ -19,8 +15,6 @@ import org.study.boychat.logger.TomatoLogger;
 import org.study.handler.AuthHandler;
 import org.study.handler.LoginHandler;
 import org.study.handler.MessageHandler;
-
-import java.util.List;
 
 /**
  * @author tomato
@@ -38,47 +32,33 @@ public class BoyChatReactorServer {
 
     private final ServerBootstrap serverBootstrap;
 
-    private final List<ChannelHandler> handlers;
-
     public BoyChatReactorServer(int bindPort) {
         this.bindPort = bindPort;
         this.bossGroup = new NioEventLoopGroup();
         this.workerGroup = new NioEventLoopGroup();
-        this.handlers = Lists.newArrayList(
-                //decoder
-                new PacketSplitter(),
-                new PacketDecoder(),
-                new ProtoDecoder(),
-
-                //handler
-                new LoginHandler(),
-                new AuthHandler(),
-                new MessageHandler(),
-
-                //encoder
-                new PacketEncoder(),
-                new ProtoEncoder(new CommonProtoPacketFactory())
-        );
         this.serverBootstrap = new ServerBootstrap().group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new BoyChatReactorServer.BoyChatChannelInitializer(handlers));
+                .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                    @Override
+                    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                        nioSocketChannel.pipeline()
+                                //decoder
+                                .addLast(new PacketSplitter())
+                                .addLast(new PacketDecoder())
+                                .addLast(new ProtoDecoder())
+                                //handler
+                                .addLast(new LoginHandler())
+                                .addLast(new AuthHandler())
+                                .addLast(new MessageHandler())
+                                //encoder
+                                .addLast(new PacketEncoder())
+                                .addLast(new ProtoEncoder(new CommonProtoPacketFactory()));
+                    }
+                });
     }
 
     public void start() {
         serverBootstrap.bind(bindPort);
         LOGGER.info("server started on port " + bindPort);
-    }
-
-    @AllArgsConstructor
-    private static class BoyChatChannelInitializer extends ChannelInitializer<NioSocketChannel> {
-
-        private final List<ChannelHandler> handlers;
-
-        @Override
-        protected void initChannel(NioSocketChannel ch) throws Exception {
-            if (CollectionUtils.isNotEmpty(handlers)) {
-                handlers.forEach(ch.pipeline()::addLast);
-            }
-        }
     }
 }

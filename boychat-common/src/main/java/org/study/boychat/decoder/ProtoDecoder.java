@@ -10,6 +10,7 @@ import org.study.boychat.data.MessageRequest;
 import java.util.List;
 
 /**
+ * 将body体进行proto反序列化
  * @author tomato
  * Created on 2020.11.19
  */

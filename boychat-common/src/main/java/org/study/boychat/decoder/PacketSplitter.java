@@ -6,13 +6,20 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import org.boychat.constants.Constants;
 
 /**
+ * 解析报文长度
  * @author tomato
  * Created on 2020.11.18
  */
 public class PacketSplitter extends LengthFieldBasedFrameDecoder {
 
+    /**
+     * 离长度字段多少字节
+     */
     private static final int LENGTH_FIELD_OFFSET_BYTES = 21;
 
+    /**
+     * 长度字段本身多少字节
+     */
     private static final int LENGTH_FIELD_BYTES = 4;
     
     public PacketSplitter() {

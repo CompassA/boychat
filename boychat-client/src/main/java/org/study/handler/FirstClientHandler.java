@@ -33,7 +33,7 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
         //create request
         ChatPacket packet = protoPacketFactory.create(
                 LoginRequest.newBuilder()
-                        .setAccount(UUID.randomUUID().toString())
+                        .setAccount("test")
                         .setPassword(UUID.randomUUID().toString())
                         .build()
         );

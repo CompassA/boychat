@@ -95,7 +95,11 @@ public class BoyChatClientStarter {
                         e.printStackTrace();
                     }
                     ChatPacket packet = packetFactory.create(
-                            MessageRequest.newBuilder().setMessage(oneLine).build());
+                            MessageRequest.newBuilder()
+                                    .setDesUserId("test")
+                                    .setSrcUserId("test")
+                                    .setMessage(oneLine)
+                                    .build());
                     int bufferLen = packet.getLength() + Constants.HEADER_LENGTH;
                     ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer(bufferLen, bufferLen);
                     ReadWriteBufferUtil.write(byteBuf, packet);

@@ -8,6 +8,7 @@ import org.study.boychat.utils.ReadWriteBufferUtil;
 import java.util.List;
 
 /**
+ * 将二进制解码为packet
  * @author tomato
  * Created on 2020.11.19
  */

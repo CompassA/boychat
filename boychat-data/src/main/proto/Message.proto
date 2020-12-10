@@ -19,12 +19,17 @@ message LoginRequest {
 
 message LoginResponse {
     bool success = 1;
+    string token = 2;
 }
 
 message MessageRequest {
     string message = 1;
+    string srcUserId = 2;
+    string desUserId = 3;
 }
 
 message MessageResponse {
     string message = 1;
+    string srcUserId = 2;
+    string desUserId = 3;
 }

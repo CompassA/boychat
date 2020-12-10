@@ -6,6 +6,7 @@ import org.study.boychat.logger.TomatoLogger;
 import org.study.utils.LoginUtil;
 
 /**
+ * 鉴权
  * @author Tomato
  * Created on 2020.12.07
  */

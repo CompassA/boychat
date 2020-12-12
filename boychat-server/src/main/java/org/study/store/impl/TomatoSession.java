@@ -15,7 +15,7 @@ public class TomatoSession implements Session {
     @Setter
     private String token;
 
-    private final String userId;
+    private final String email;
 
     private final String userName;
 
@@ -29,8 +29,8 @@ public class TomatoSession implements Session {
     }
 
     @Override
-    public String getUserId() {
-        return this.userId;
+    public String getEmail() {
+        return this.email;
     }
 
     @Override

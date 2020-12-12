@@ -13,7 +13,7 @@ message Message {
 }
 
 message LoginRequest {
-    string account = 1;
+    string email = 1;
     string password = 2;
 }
 
@@ -24,12 +24,12 @@ message LoginResponse {
 
 message MessageRequest {
     string message = 1;
-    string srcUserId = 2;
-    string desUserId = 3;
+    string srcEmail = 2;
+    string desEmail = 3;
 }
 
 message MessageResponse {
     string message = 1;
-    string srcUserId = 2;
-    string desUserId = 3;
+    string srcEmail = 2;
+    string desEmail = 3;
 }

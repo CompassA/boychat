@@ -6,6 +6,7 @@ import org.study.store.Session;
 import org.study.store.SessionManager;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,7 +29,7 @@ public class LocalSessionManager implements SessionManager {
 
     @Override
     public String saveSession(Session session) {
-        if (session == null || StringUtils.isBlank(session.getUserId())
+        if (session == null || StringUtils.isBlank(session.getEmail())
                 || StringUtils.isBlank(session.getUserName())
                 || StringUtils.isBlank(session.getUserPassword())
                 || session.getChannel() == null) {
@@ -36,7 +37,7 @@ public class LocalSessionManager implements SessionManager {
         }
         String token = UUID.randomUUID().toString().replace("-", "");
         session.setToken(token);
-        USED_ID_SESSION_MAP.put(session.getUserId(), session);
+        USED_ID_SESSION_MAP.put(session.getEmail(), session);
         TOKEN_SESSION_MAP.put(token, session);
         return token;
     }
@@ -55,5 +56,10 @@ public class LocalSessionManager implements SessionManager {
             return Optional.empty();
         }
         return Optional.ofNullable(USED_ID_SESSION_MAP.get(userId));
+    }
+
+    @Override
+    public Set<String> getAllUserId() {
+        return USED_ID_SESSION_MAP.keySet();
     }
 }

@@ -25,14 +25,14 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginRequest> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequest msg) throws Exception {
         Session session = TomatoSession.builder()
-                .userId(msg.getAccount())
+                .email(msg.getEmail())
                 .userName("xxx")
                 .userPassword(msg.getPassword())
                 .channel(ctx.channel())
                 .build();
         String token = SESSION_MANAGER.saveSession(session);
         LoginUtil.markLogin(ctx.channel());
-        LOGGER.info("client login: account" + msg.getAccount());
+        LOGGER.info("client login: email" + msg.getEmail());
         ctx.channel().writeAndFlush(
                 LoginResponse.newBuilder()
                         .setSuccess(true)

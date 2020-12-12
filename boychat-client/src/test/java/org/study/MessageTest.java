@@ -19,7 +19,7 @@ public class MessageTest {
         String account = "user person";
         String password = "1234";
         LoginRequest loginMsg = LoginRequest.newBuilder()
-                .setAccount(account)
+                .setEmail(account)
                 .setPassword(password)
                 .build();
         byte[] body = loginMsg.toByteArray();

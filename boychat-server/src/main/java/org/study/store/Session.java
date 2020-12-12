@@ -10,7 +10,7 @@ public interface Session {
 
     String getToken();
 
-    String getUserId();
+    String getEmail();
 
     String getUserName();
 

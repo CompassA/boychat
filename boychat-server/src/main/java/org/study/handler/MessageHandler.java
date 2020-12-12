@@ -19,20 +19,21 @@ public class MessageHandler extends SimpleChannelInboundHandler<MessageRequest> 
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(MessageHandler.class);
 
-    private static final SessionManager sessionManager = SessionManager.getSingletonByClass(LocalSessionManager.class);
+    private static final SessionManager SESSION_MANAGER = SessionManager.getSingletonByClass(LocalSessionManager.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequest request) throws Exception {
-        String clientMessage = request.getMessage();
-        String desUserId = request.getDesUserId();
-        sessionManager.getSessionByUserId(desUserId).ifPresent(session ->
-                session.getChannel().writeAndFlush(
-                        MessageResponse.newBuilder()
-                                .setMessage(clientMessage)
-                                .setSrcUserId(session.getUserId())
-                                .setDesUserId(request.getSrcUserId())
-                                .build()
-                )
-        );
+        for (String userId : SESSION_MANAGER.getAllUserId()) {
+            SESSION_MANAGER.getSessionByUserId(userId).ifPresent(session -> {
+                MessageResponse response = MessageResponse.newBuilder()
+                        .setMessage(request.getMessage())
+                        //消息来源
+                        .setSrcEmail(request.getSrcEmail())
+                        //消息要发送给谁
+                        .setDesEmail(session.getEmail())
+                        .build();
+                session.getChannel().writeAndFlush(response);
+            });
+        }
     }
 }

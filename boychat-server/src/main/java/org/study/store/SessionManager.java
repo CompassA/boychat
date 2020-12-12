@@ -5,6 +5,7 @@ import org.study.store.impl.LocalSessionManager;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * 登录态管理
@@ -52,4 +53,10 @@ public interface SessionManager {
      * @return session
      */
     Optional<Session> getSessionByUserId(String userId);
+
+    /**
+     * 得到所有登录用户的id
+     * @return 所有用户的id
+     */
+    Set<String> getAllUserId();
 }

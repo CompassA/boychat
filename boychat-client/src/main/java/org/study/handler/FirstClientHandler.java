@@ -22,6 +22,7 @@ import java.util.UUID;
  * @author fanqie
  * @date 2020/6/3
  */
+@Deprecated
 public class FirstClientHandler extends ChannelInboundHandlerAdapter {
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(FirstClientHandler.class);
@@ -33,7 +34,7 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
         //create request
         ChatPacket packet = protoPacketFactory.create(
                 LoginRequest.newBuilder()
-                        .setAccount("test")
+                        .setEmail("test")
                         .setPassword(UUID.randomUUID().toString())
                         .build()
         );

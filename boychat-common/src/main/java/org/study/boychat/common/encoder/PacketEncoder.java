@@ -1,10 +1,10 @@
-package org.study.boychat.encoder;
+package org.study.boychat.common.encoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import org.boychat.data.ChatPacket;
-import org.study.boychat.utils.ReadWriteBufferUtil;
+import org.study.boychat.common.utils.ReadWriteBufferUtil;
 
 /**
  * @author tomato

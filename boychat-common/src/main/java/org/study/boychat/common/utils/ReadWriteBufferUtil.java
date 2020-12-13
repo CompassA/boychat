@@ -1,4 +1,4 @@
-package org.study.boychat.utils;
+package org.study.boychat.common.utils;
 
 import io.netty.buffer.ByteBuf;
 import org.boychat.data.ChatPacket;

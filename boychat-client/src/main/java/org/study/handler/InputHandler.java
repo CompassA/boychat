@@ -7,10 +7,10 @@ import org.apache.commons.lang.StringUtils;
 import org.boychat.constants.Constants;
 import org.boychat.data.ChatPacket;
 import org.boychat.data.core.ProtoPacketFactory;
-import org.study.boychat.data.LoginRequest;
-import org.study.boychat.data.MessageRequest;
-import org.study.boychat.logger.TomatoLogger;
-import org.study.boychat.utils.ReadWriteBufferUtil;
+import org.study.boychat.common.data.LoginRequest;
+import org.study.boychat.common.data.MessageRequest;
+import org.study.boychat.common.logger.TomatoLogger;
+import org.study.boychat.common.utils.ReadWriteBufferUtil;
 import org.study.client.data.ClientDataManager;
 
 import java.io.BufferedReader;
@@ -89,7 +89,7 @@ public class InputHandler implements Runnable {
     }
 
     private void doLogin() {
-        System.out.print("please enter email:");
+        System.out.print("please enter your name:");
         final String email;
         try {
             email = consoleReader.readLine();
@@ -97,14 +97,15 @@ public class InputHandler implements Runnable {
             LOGGER.error("read email failed", e);
             return;
         }
-        System.out.print("please enter password: ");
-        final String password;
-        try {
-            password = consoleReader.readLine();
-        } catch (IOException e) {
-            LOGGER.error("read password failed", e);
-            return;
-        }
+        final String password = "mock";
+//        System.out.print("please enter password: ");
+//        final String password;
+//        try {
+//            password = consoleReader.readLine();
+//        } catch (IOException e) {
+//            LOGGER.error("read password failed", e);
+//            return;
+//        }
         if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
             LOGGER.error("invalid email\\password");
             return;

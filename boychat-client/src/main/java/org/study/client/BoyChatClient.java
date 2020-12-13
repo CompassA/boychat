@@ -9,12 +9,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.Getter;
 import org.boychat.factory.CommonProtoPacketFactory;
-import org.study.boychat.decoder.PacketDecoder;
-import org.study.boychat.decoder.PacketSplitter;
-import org.study.boychat.logger.TomatoLogger;
-import org.study.boychat.utils.ThreadPoolUtil;
+import org.study.boychat.common.decoder.PacketDecoder;
+import org.study.boychat.common.decoder.PacketSplitter;
+import org.study.boychat.common.handler.ProtoHandler;
+import org.study.boychat.common.logger.TomatoLogger;
+import org.study.boychat.common.utils.ThreadPoolUtil;
 import org.study.client.data.ClientDataManager;
-import org.study.client.decoder.ClientProtoDecoder;
 import org.study.handler.InputHandler;
 import org.study.handler.LoginHandler;
 import org.study.handler.MsgResponseHandler;
@@ -58,10 +58,10 @@ public class BoyChatClient {
                                 //decoder
                                 .addLast(new PacketSplitter())
                                 .addLast(new PacketDecoder())
-                                .addLast(new ClientProtoDecoder())
+                                .addLast(ProtoHandler.INSTANCE)
                                 //handler
                                 .addLast(new LoginHandler(clientDataManager))
-                                .addLast(new MsgResponseHandler());
+                                .addLast(MsgResponseHandler.INSTANCE);
 
                     }
                 });
@@ -86,7 +86,7 @@ public class BoyChatClient {
 
     private void startConsoleThread() {
         singleThreadPool.execute(
-                new InputHandler(channel, new CommonProtoPacketFactory(), clientDataManager));
+                new InputHandler(channel, CommonProtoPacketFactory.INSTANCE, clientDataManager));
     }
 
     public void stopConsoleThread() {

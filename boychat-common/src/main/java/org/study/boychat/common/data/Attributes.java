@@ -1,4 +1,4 @@
-package org.study.boychat.data;
+package org.study.boychat.common.data;
 
 import io.netty.util.AttributeKey;
 import org.boychat.constants.Constants;

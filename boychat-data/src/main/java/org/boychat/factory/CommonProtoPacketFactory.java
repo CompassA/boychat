@@ -17,6 +17,11 @@ public final class CommonProtoPacketFactory implements ProtoPacketFactory {
 
     private static final AtomicLong ID_GENERATOR = new AtomicLong();
 
+    public static final CommonProtoPacketFactory INSTANCE = new CommonProtoPacketFactory();
+
+    private CommonProtoPacketFactory() {
+    }
+
     @Override
     public ChatPacket create(AbstractMessage message) {
         if (message == null) {

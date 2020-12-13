@@ -1,6 +1,6 @@
-package org.study.boychat.logger;
+package org.study.boychat.common.logger;
 
-import org.study.boychat.utils.DateUtil;
+import org.study.boychat.common.utils.DateUtil;
 
 import java.io.PrintStream;
 import java.time.LocalDateTime;

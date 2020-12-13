@@ -1,4 +1,4 @@
-package org.study.boychat.utils;
+package org.study.boychat.common.utils;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

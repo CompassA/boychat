@@ -9,12 +9,12 @@ import org.boychat.data.ChatPacket;
 import org.boychat.data.core.ProtoPacketFactory;
 import org.boychat.enums.MsgType;
 import org.boychat.factory.CommonProtoPacketFactory;
-import org.study.boychat.data.LoginRequest;
-import org.study.boychat.data.LoginResponse;
-import org.study.boychat.data.MessageResponse;
-import org.study.boychat.logger.TomatoLogger;
-import org.study.boychat.utils.ReadWriteBufferUtil;
-import org.study.boychat.data.Attributes;
+import org.study.boychat.common.data.LoginRequest;
+import org.study.boychat.common.data.LoginResponse;
+import org.study.boychat.common.data.MessageResponse;
+import org.study.boychat.common.logger.TomatoLogger;
+import org.study.boychat.common.utils.ReadWriteBufferUtil;
+import org.study.boychat.common.data.Attributes;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(FirstClientHandler.class);
 
-    private final ProtoPacketFactory protoPacketFactory = new CommonProtoPacketFactory();
+    private final ProtoPacketFactory protoPacketFactory = CommonProtoPacketFactory.INSTANCE;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {

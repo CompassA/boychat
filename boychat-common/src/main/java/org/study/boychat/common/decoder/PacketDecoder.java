@@ -1,9 +1,9 @@
-package org.study.boychat.decoder;
+package org.study.boychat.common.decoder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-import org.study.boychat.utils.ReadWriteBufferUtil;
+import org.study.boychat.common.utils.ReadWriteBufferUtil;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.study.boychat.utils;
+package org.study.boychat.common.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

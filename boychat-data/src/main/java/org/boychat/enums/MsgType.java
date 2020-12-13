@@ -2,10 +2,10 @@ package org.boychat.enums;
 
 import com.google.protobuf.AbstractMessage;
 import lombok.Getter;
-import org.study.boychat.data.LoginRequest;
-import org.study.boychat.data.LoginResponse;
-import org.study.boychat.data.MessageRequest;
-import org.study.boychat.data.MessageResponse;
+import org.study.boychat.common.data.LoginRequest;
+import org.study.boychat.common.data.LoginResponse;
+import org.study.boychat.common.data.MessageRequest;
+import org.study.boychat.common.data.MessageResponse;
 
 /**
  * @author fanqie

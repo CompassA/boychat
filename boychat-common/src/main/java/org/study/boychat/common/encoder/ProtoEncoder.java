@@ -1,4 +1,4 @@
-package org.study.boychat.encoder;
+package org.study.boychat.common.encoder;
 
 import com.google.protobuf.AbstractMessage;
 import io.netty.channel.ChannelHandlerContext;

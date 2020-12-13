@@ -2,9 +2,9 @@ package org.study.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.study.boychat.data.Attributes;
-import org.study.boychat.data.LoginResponse;
-import org.study.boychat.logger.TomatoLogger;
+import org.study.boychat.common.data.Attributes;
+import org.study.boychat.common.data.LoginResponse;
+import org.study.boychat.common.logger.TomatoLogger;
 import org.study.client.data.ClientDataManager;
 
 /**

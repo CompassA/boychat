@@ -3,7 +3,7 @@ package org.study.utils;
 
 import io.netty.channel.Channel;
 import io.netty.util.Attribute;
-import org.study.boychat.data.Attributes;
+import org.study.boychat.common.data.Attributes;
 
 /**
  * @author Tomato
@@ -21,6 +21,6 @@ public final class LoginUtil {
 
     public static boolean isLogin(Channel channel) {
         Attribute<Boolean> loginMark = channel.attr(Attributes.LOGIN_MARK);
-        return loginMark != null && loginMark.get();
+        return loginMark != null && loginMark.get() != null;
     }
 }

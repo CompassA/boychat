@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 import org.study.boychat.common.data.MessageRequest;
 import org.study.boychat.common.data.MessageResponse;
 import org.study.boychat.common.logger.TomatoLogger;
@@ -16,17 +17,13 @@ import org.study.store.impl.LocalSessionManager;
  * Created on 2020.11.15
  */
 @Getter
+@Component
 @ChannelHandler.Sharable
 public class MessageHandler extends SimpleChannelInboundHandler<MessageRequest> {
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(MessageHandler.class);
 
     private static final SessionManager SESSION_MANAGER = SessionManager.getSingletonByClass(LocalSessionManager.class);
-
-    public static final MessageHandler INSTANCE = new MessageHandler();
-
-    private MessageHandler() {
-    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequest request) throws Exception {

@@ -6,6 +6,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.boychat.factory.CommonProtoPacketFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.study.boychat.common.decoder.PacketDecoder;
 import org.study.boychat.common.decoder.PacketSplitter;
 import org.study.boychat.common.decoder.ProtoDecoder;
@@ -30,12 +32,15 @@ public class BoyChatReactorServer {
 
     private final NioEventLoopGroup workerGroup;
 
+    private final ApplicationContext applicationContext;
+
     private final ServerBootstrap serverBootstrap;
 
-    public BoyChatReactorServer(int bindPort) {
+    public BoyChatReactorServer(Class<?> rootClazz, int bindPort) {
         this.bindPort = bindPort;
         this.bossGroup = new NioEventLoopGroup();
         this.workerGroup = new NioEventLoopGroup();
+        this.applicationContext = new AnnotationConfigApplicationContext(rootClazz);
         this.serverBootstrap = new ServerBootstrap().group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
@@ -47,9 +52,9 @@ public class BoyChatReactorServer {
                                 .addLast(new PacketDecoder())
                                 .addLast(new ProtoDecoder())
                                 //handler
-                                .addLast(LoginHandler.INSTANCE)
+                                .addLast(applicationContext.getBean(LoginHandler.class))
                                 .addLast(new AuthHandler())
-                                .addLast(MessageHandler.INSTANCE)
+                                .addLast(applicationContext.getBean(MessageHandler.class))
                                 //encoder
                                 .addLast(new PacketEncoder())
                                 .addLast(new ProtoEncoder(CommonProtoPacketFactory.INSTANCE));

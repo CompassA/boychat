@@ -3,6 +3,7 @@ package org.study.handler;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.springframework.stereotype.Component;
 import org.study.boychat.common.data.LoginRequest;
 import org.study.boychat.common.data.LoginResponse;
 import org.study.boychat.common.logger.TomatoLogger;
@@ -17,14 +18,13 @@ import org.study.utils.LoginUtil;
  * @author tomato
  * Created on 2020.11.15
  */
+@Component
 @ChannelHandler.Sharable
 public class LoginHandler extends SimpleChannelInboundHandler<LoginRequest> {
 
     private static final TomatoLogger LOGGER = TomatoLogger.getLogger(LoginHandler.class);
 
     private static final SessionManager SESSION_MANAGER = SessionManager.getSingletonByClass(LocalSessionManager.class);
-
-    public static final LoginHandler INSTANCE = new LoginHandler();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequest msg) throws Exception {

@@ -3,7 +3,7 @@ package org.boychat.factory;
 import com.google.protobuf.ByteString;
 import org.boychat.constants.Constants;
 import org.boychat.enums.MsgType;
-import org.study.boychat.common.data.Message;
+import org.study.boychat.data.Message;
 
 /**
  * @author fanqie

@@ -4,8 +4,8 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.study.boychat.common.data.LoginRequest;
-import org.study.boychat.common.data.Message;
+import org.study.boychat.data.LoginRequest;
+import org.study.boychat.data.Message;
 
 /**
  * @author fanqie

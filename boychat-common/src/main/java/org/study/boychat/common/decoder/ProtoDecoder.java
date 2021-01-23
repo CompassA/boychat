@@ -4,8 +4,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import org.boychat.data.ChatPacket;
 import org.boychat.enums.MsgType;
-import org.study.boychat.common.data.LoginRequest;
-import org.study.boychat.common.data.MessageRequest;
+import org.study.boychat.data.LoginRequest;
+import org.study.boychat.data.MessageRequest;
 
 import java.util.List;
 

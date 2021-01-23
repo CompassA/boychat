@@ -3,9 +3,9 @@ package org.study.common;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-import org.study.boychat.common.data.LoginRequest;
-import org.study.boychat.common.data.Message;
-import org.study.boychat.common.data.MessageRequest;
+import org.study.boychat.data.LoginRequest;
+import org.study.boychat.data.Message;
+import org.study.boychat.data.MessageRequest;
 
 import java.util.List;
 

@@ -9,8 +9,8 @@ import org.boychat.data.ChatPacket;
 import org.boychat.data.core.ProtoPacketFactory;
 import org.boychat.enums.MsgType;
 import org.boychat.factory.CommonProtoPacketFactory;
-import org.study.boychat.common.data.LoginResponse;
-import org.study.boychat.common.data.MessageResponse;
+import org.study.boychat.data.LoginResponse;
+import org.study.boychat.data.MessageResponse;
 
 import java.util.List;
 

@@ -6,11 +6,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.boychat.enums.MsgType;
 import org.boychat.factory.MessageFactory;
-import org.study.boychat.common.data.LoginRequest;
-import org.study.boychat.common.data.LoginResponse;
-import org.study.boychat.common.data.Message;
-import org.study.boychat.common.data.MessageRequest;
-import org.study.boychat.common.data.MessageResponse;
+import org.study.boychat.data.LoginRequest;
+import org.study.boychat.data.LoginResponse;
+import org.study.boychat.data.Message;
+import org.study.boychat.data.MessageRequest;
+import org.study.boychat.data.MessageResponse;
 
 /**
  * @author fanqie

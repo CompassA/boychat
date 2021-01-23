@@ -3,7 +3,7 @@ package org.study.handler;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.study.boychat.common.data.MessageResponse;
+import org.study.boychat.data.MessageResponse;
 
 /**
  * @author Tomato

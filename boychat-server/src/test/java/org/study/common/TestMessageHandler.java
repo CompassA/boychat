@@ -5,8 +5,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.Getter;
 import org.boychat.enums.MsgType;
 import org.boychat.factory.MessageFactory;
-import org.study.boychat.common.data.MessageRequest;
-import org.study.boychat.common.data.MessageResponse;
+import org.study.boychat.data.MessageRequest;
+import org.study.boychat.data.MessageResponse;
 
 import java.util.LinkedList;
 import java.util.Queue;

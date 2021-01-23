@@ -3,7 +3,7 @@ package org.study.common;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import org.study.boychat.common.data.Message;
+import org.study.boychat.data.Message;
 
 /**
  * @author tomato

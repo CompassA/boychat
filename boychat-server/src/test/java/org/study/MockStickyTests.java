@@ -11,7 +11,7 @@ import org.boychat.enums.MsgType;
 import org.boychat.factory.MessageFactory;
 import org.junit.Assert;
 import org.junit.Test;
-import org.study.boychat.common.data.MessageRequest;
+import org.study.boychat.data.MessageRequest;
 import org.study.common.TestBoyChatReactorServer;
 import org.study.common.TestMessageHandler;
 
